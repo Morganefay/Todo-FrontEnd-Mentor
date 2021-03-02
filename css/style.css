@@ -66,15 +66,19 @@ button {
     margin: 10px;
 }
 
-button img {
+.img-cross {
     width: 17px;
     /*ignore l'image avec le pointeur de la souris*/
     pointer-events: none;
 }
+img.img-checked {
+    width: 10px;
+    pointer-events: none;
+}
 
 li{
-    box-shadow: 0 8px 41px rgb(173 164 164 / 50%);
-    background-color: hsl(0, 0%, 98%);
+   /* box-shadow: 0 8px 41px rgb(173 164 164 / 50%);*/
+    background: white;
     width: 100%;
     display: flex;
     align-items: center;
@@ -91,10 +95,29 @@ li.finDeTache span {
     text-decoration: line-through;
     color: hsl(233, 11%, 84%);
 }
-
-.circle{
-    background: linear-gradient(#57ddff , #c058f3);
+button.btn-check{
+    outline: none;
+    border-radius: 50%;
+    border: solid 1px hsl(233, 11%, 84%);
+    height: 20px;
+    width: 20px;
+    background: white;
 }
+.btn-check:hover{
+    border: solid 1px linear-gradient(#57ddff , #c058f3) !important;
+}
+button.checked {
+    outline: none;
+    border-radius: 50%;
+    background: linear-gradient(#57ddff , #c058f3);
+    height: 20px;
+    width: 20px;
+}
+
+.hidden-bar{
+    display: none;
+}
+
 /***FOOTER***/
 .attribution { font-size: 11px; text-align: center; }
 .attribution a { color: hsl(228, 45%, 44%); }
