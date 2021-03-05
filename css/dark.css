@@ -1,0 +1,6 @@
+body{
+    background-color: hsl(235, 21%, 11%);
+}
+input#item{
+    border: 1px solid black;    
+}

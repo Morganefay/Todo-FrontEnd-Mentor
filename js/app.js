@@ -1,13 +1,19 @@
+const head = document.querySelector('head');
 const form = document.querySelector('form');
 const liste = document.querySelector('ul');
 const input = document.querySelector('form input');
 const toggleIcon = document.querySelector('.toggle-icon');
 const bgImg = document.querySelector('.bg-img');
 const bgColor = document.querySelector('body');
+const actionsShow = document.querySelector('.actions');
+const clearAll = document.querySelector('.clear-all')
+
 
 let allTask = [];
 let tasksLeft =0;
 let tasksChecked = 0;
+
+
 
 toggleIcon.innerHTML = '<img src="images/icon-moon.svg">';
 bgImg.setAttribute('src', './images/bg-desktop-light.jpg');
@@ -57,24 +63,41 @@ function showList(todo){
     item.appendChild(txt);
 
     const btnDelete = document.createElement('button');
+    btnDelete.setAttribute('class', 'cross');
     btnDelete.addEventListener('click', deleteTask);
+    
 
     const imgDelete = document.createElement('img');
     imgDelete.setAttribute('src', './images/icon-cross.svg');
     imgDelete.setAttribute('class', 'img-cross');
-    btnDelete.appendChild(imgDelete);
-    item.appendChild(btnDelete);
+    
+   
 
+    item.addEventListener('mouseenter', (event) => {
+        item.appendChild(btnDelete);
+        btnDelete.appendChild(imgDelete);
+    })
+    item.addEventListener('mouseleave', (event) => {
+        btnDelete.remove();
+    })
+
+    
+    
     liste.appendChild(item);
     allTask.push(item);
     tasksLeft = allTask.length;
 
     if(allTask.length >= 1){
-        const actionsShow = document.querySelector('.actions');
         actionsShow.classList.remove('hidden-bar');
         const incrementItems = document.querySelector('.nbItemsLeft');
         incrementItems.innerText = `${tasksLeft} taches restantes`;
     }
+
+    clearAll.addEventListener('click', event => {
+        item.remove();
+        actionsShow.classList.add('hidden-bar');
+        allTask = [];
+    })
 }
 
 function taskDone(e){
@@ -101,22 +124,32 @@ function taskDone(e){
 
 
 function switchMode(){
+    const cssMode = document.createElement('link');
+    cssMode.setAttribute('rel', 'stylesheet');
+    head.appendChild(cssMode);
+    //ligth mode
     if(toggleValue === 1){
+        cssMode.setAttribute('href', 'css/light.css');
         toggleIcon.innerHTML = '<img src="images/icon-moon.svg">';
         bgImg.setAttribute('src', './images/bg-desktop-light.jpg');
-        bgColor.style.backgroundColor = '';
+        /* bgColor.style.backgroundColor = '';
+        input.style.backgroundColor = '';*/
         toggleValue = 0;
-    }else {
+    }
+    //dark mode
+    else {
+        cssMode.setAttribute('href', 'css/dark.css');
         toggleIcon.innerHTML = '<img src="images/icon-sun.svg">';
         bgImg.setAttribute('src', './images/bg-desktop-dark.jpg');
-        bgColor.style.backgroundColor = 'hsl(235, 21%, 11%)';
+        /* bgColor.style.backgroundColor = 'hsl(235, 21%, 11%)';
+        input.style.backgroundColor = 'hsl(234, 39%, 85%)';*/
         toggleValue = 1;
     }
 }
 
 function deleteTask(e){
     allTask.forEach(el => {
-
+        //TODO retirer la class checked si elle est presente
         if(e.target.parentNode.getAttribute('data-key') === el.getAttribute('data-key')){
             el.remove();
             allTask = allTask.filter(li => li.dataset.key !== el.dataset.key);

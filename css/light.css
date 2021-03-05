@@ -1,0 +1,14 @@
+body{
+    background-color: hsl(0, 0%, 98%);
+}
+main{
+    color: hsl(235, 19%, 35%);
+}
+input#item{
+    border: 1px solid white;    
+}
+li{
+    /*box-shadow: 0 8px 41px rgb(173 164 164 / 50%);*/
+    background: white;
+    border-bottom: 1px solid hsl(233, 11%, 84%);
+}
